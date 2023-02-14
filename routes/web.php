@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('start');  //　変更：welcome -> start
 });
+Auth::routes();
+
+Route::get('/post/{id}',[PostController::class,'detail']);
+Route::get('/home', [PostController::class, 'index']);
+Route::get('/add', [PostController::class, 'create']);
+Route::post('postStore', [PostController::class, 'store'])->name('postStore');
